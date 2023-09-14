@@ -1,0 +1,8 @@
+container:
+  res:
+    requests:
+      cpu: "500m"
+      memory: "300Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1500Mi"

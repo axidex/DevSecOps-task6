@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-cdx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-cdx
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-cdx
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-cdx
+        image: axidex/api1 # cyclonedx/cyclonedx-gomod
+        resources:
+          requests:
+            cpu: {{ .Values.container.res.requests.cpu }}
+            memory: {{ .Values.container.res.requests.memory }}
+          limits:
+            cpu: {{ .Values.container.res.limits.cpu }}     # Ограничение на использование CPU
+            memory: {{ .Values.container.res.limits.memory }}
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-my-api-secret
+              key: api-key
+        - name: PASSWORD_AUTH
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-my-api-secret
+              key: password
+        - name: IP_DB
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-cfg
+              key: dbip
+        - name: IP_DT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-cfg
+              key: dtip
+        - name: BRANCH_DT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-cfg
+              key: branch
+        - name: NAME_DT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-cfg
+              key: name
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-cdx-service
+spec:
+  selector:
+    app: {{ .Release.Name }}-cdx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

@@ -1,0 +1,7 @@
+# metadata here
+apiVersion: v2                  
+name: dt-HelmChart
+description: Helm chart for dt
+type: application
+version: 0.1.0                  # version of helm chart
+appVersion: "1.2.3"             # version of application

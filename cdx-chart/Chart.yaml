@@ -1,0 +1,7 @@
+# metadata here
+apiVersion: v2                  
+name: cdx-HelmChart
+description: Helm chart for cdx
+type: application
+version: 0.1.0                  # version of helm chart
+appVersion: "1.2.3"             # version of application
