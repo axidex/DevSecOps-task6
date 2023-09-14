@@ -20,9 +20,7 @@ pipeline {
                 sh 'docker push axidex/api1 '
             }
         }
-    }
 
-    stages {
         stage('Helm') {
             steps {
                 echo 'Helm..'
@@ -31,6 +29,8 @@ pipeline {
             }
         }
     }
+
+
     
     post {
         // Clean after build
