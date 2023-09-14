@@ -12,15 +12,6 @@ pipeline {
     agent any
 
     stages {
-        stage('SCM') {
-            steps {
-                echo 'SCM..'
-                
-                sh 'https://github.com/axidex/DevSecOps-task6' // https://github.com/0c34/govwa https://github.com/netlify/gocommerce
-                sh 'mv ' + git_ref[-1] + ' src'
-            }
-        }
-
         stage('Docker') {
             steps {
                 echo 'Docker..'
