@@ -21,6 +21,16 @@ pipeline {
             }
         }
     }
+
+    stages {
+        stage('Helm') {
+            steps {
+                echo 'Helm..'
+                sh 'chmod 777 chart.sh'
+                sh './chart.sh cdx'
+            }
+        }
+    }
     
     post {
         // Clean after build
