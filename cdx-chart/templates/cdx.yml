@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}-cdx
-        image: axidex/api1 # cyclonedx/cyclonedx-gomod
+        image: {{ .Values.image.name }} # cyclonedx/cyclonedx-gomod
         resources:
           requests:
             cpu: {{ .Values.container.res.requests.cpu }}

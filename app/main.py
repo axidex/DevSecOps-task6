@@ -83,3 +83,8 @@ async def sca(data: MyDataModel, user: dict = Depends(authenticate_user)):
 @rateLimited(maxCalls=10, timeFrame=60)
 async def sca(user: dict = Depends(authenticate_user)):
     print("hello")
+
+@app.post("/test2")
+@rateLimited(maxCalls=10, timeFrame=60)
+async def sca(user: dict = Depends(authenticate_user)):
+    print("hello")

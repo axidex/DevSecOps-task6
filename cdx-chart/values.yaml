@@ -6,3 +6,6 @@ container:
     limits:
       cpu: "1000m"
       memory: "1500Mi"
+
+# image:
+#   sha: "321"
